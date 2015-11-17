@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @admin_message.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @admin_message.content %>
+</p>
+
+<p>
+  <strong>Abstract:</strong>
+  <%= @admin_message.abstract %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @admin_message.author %>
+</p>
+
+<p>
+  <strong>Tag:</strong>
+  <%= @admin_message.tag %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @admin_message.category %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @admin_message.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_admin_message_path(@admin_message) %> |
+<%= link_to 'Back', admin_messages_path %>

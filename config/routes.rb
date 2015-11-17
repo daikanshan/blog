@@ -1,7 +1,28 @@
 Rails.application.routes.draw do
   namespace :admin do
-    resources :users
+    resources :tags
   end
+  namespace :admin do
+    resources :comments
+    resources :categories
+    resources :messages do
+      member do
+        delete :batch_destroy
+      end
+    end
+    resources :users do
+      member do
+        delete :batch_destroy
+      end
+    end
+    get 'index/index'
+    get 'config/index'
+    get 'session/new'
+    post 'session/create'
+  end
+  root 'admin/index#index'
+  get 'admin' => 'admin/index#index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

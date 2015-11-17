@@ -11,15 +11,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151115022742) do
+ActiveRecord::Schema.define(version: 20151117111807) do
+
+  create_table "admin_categories", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "code",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "admin_comments", force: :cascade do |t|
+    t.integer  "from",       limit: 4
+    t.integer  "to",         limit: 4
+    t.text     "content",    limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "admin_messages", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.text     "content",    limit: 65535
+    t.string   "abstract",   limit: 255
+    t.string   "author",     limit: 255
+    t.string   "tag",        limit: 255
+    t.string   "category",   limit: 255
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "admin_tags", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.integer  "code",       limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "admin_users", force: :cascade do |t|
-    t.string   "username"
-    t.string   "realname"
-    t.string   "password_digest"
-    t.string   "email"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string   "username",        limit: 255
+    t.string   "realname",        limit: 255
+    t.string   "password_digest", limit: 255
+    t.string   "email",           limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
 end

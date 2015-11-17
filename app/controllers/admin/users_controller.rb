@@ -1,4 +1,4 @@
-class Admin::UsersController < ApplicationController
+class Admin::UsersController < AdminController
   before_action :set_admin_user, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/users
@@ -28,7 +28,7 @@ class Admin::UsersController < ApplicationController
 
     respond_to do |format|
       if @admin_user.save
-        format.html { redirect_to @admin_user, notice: 'User was successfully created.' }
+        format.html { redirect_to @admin_user, notice: "用户<#{@admin_user.username}>创建成功！" }
         format.json { render :show, status: :created, location: @admin_user }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class Admin::UsersController < ApplicationController
   def update
     respond_to do |format|
       if @admin_user.update(admin_user_params)
-        format.html { redirect_to @admin_user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @admin_user, notice: "用户<#{@admin_user.username}>更新成功！" }
         format.json { render :show, status: :ok, location: @admin_user }
       else
         format.html { render :edit }
@@ -56,11 +56,28 @@ class Admin::UsersController < ApplicationController
   def destroy
     @admin_user.destroy
     respond_to do |format|
-      format.html { redirect_to admin_users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to admin_users_url, notice: "用户<#{@admin_user.username}>删除成功！" }
       format.json { head :no_content }
     end
   end
 
+  def batch_destroy
+    user_ids = params[:id].split(",").flatten
+    if user_ids.nil?||user_ids.empty?
+      respond_to do |format|
+        format.html { redirect_to admin_users_url,notice:'未选择用户！'}
+        format.json { head :no_content }
+      end
+    else
+      user_ids.each do |id|
+        Admin::User.find(id).destroy
+      end
+      respond_to do |format|
+        format.html { redirect_to admin_users_url,notice:'操作成功！'}
+        format.json { head :no_content }
+      end
+    end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_admin_user
@@ -69,6 +86,6 @@ class Admin::UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_user_params
-      params.require(:admin_user).permit(:username, :realname, :password_digest, :email)
+      params.require(:admin_user).permit(:username, :realname, :password, :password_confirmation, :email)
     end
 end

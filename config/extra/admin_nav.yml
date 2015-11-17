@@ -1,0 +1,27 @@
+
+nav:
+  -
+    text: 系统概览
+    icon: dashboard
+    path: index/index
+  -
+    text: 用户管理
+    icon: user
+    path: users/index
+  -
+    text: 文章管理
+    icon: file
+    path: messages/index
+  -
+    text: 分类管理
+    icon: th-list
+    path: categories/index
+
+  -
+    text: 评论管理
+    icon: comment
+    path: comments/index
+  -
+    text: 系统设置
+    icon: cog
+    path: config/index

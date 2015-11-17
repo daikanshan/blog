@@ -19,5 +19,22 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  hello: "Hello world"
+cn:
+  activerecord:
+    models:
+      admin/user: 用户
+      admin/message: 文章
+      admin/category: 类别
+      admin/comment: 评论
+      admin/tag: 标签
+
+    attributes:
+      admin/message:
+        title: 标题
+        content: 内容
+        abstract: 提要
+        author: 作者
+  helpers:
+    submit:
+      create: "添加%{model}信息"
+      update: "更新%{model}信息"
