@@ -19,7 +19,7 @@
           <% @navs.each do |nav| %>
             <% if params[:controller] == nav[:options][:controller] && params[:action] == nav[:options][:action] %>
               <li class="active">
-                <a href="<%= url_for nav[:options] %>" class="link">
+                <a href="<%= url_for nav[:options] %>" class="link active">
                   <i class="glyphicon glyphicon-<%= nav[:icon] %>"></i>
                   <span><%= nav[:text] %></span>
                 </a>

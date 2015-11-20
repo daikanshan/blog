@@ -1,5 +1,5 @@
 <%= form_for(@admin_category) do |f| %>
-  <% if @admin_category.errors.any? %>
+  <!-- <% if @admin_category.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@admin_category.errors.count, "error") %> prohibited this admin_category from being saved:</h2>
 
@@ -9,17 +9,17 @@
       <% end %>
       </ul>
     </div>
-  <% end %>
+  <% end %> -->
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name ,class:'form-control'%>
   </div>
-  <div class="field">
-    <%= f.label :code %><br>
-    <%= f.text_field :code %>
+  <div class="form-group">
+    <%= f.select :father_id,options_from_collection_for_select(@categories,'id','name',"#{@admin_category.id}"),
+                    include_blank: "选择父分类" %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <%= f.submit "提交" ,class:'form-control'%>
   </div>
 <% end %>

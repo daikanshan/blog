@@ -5,7 +5,7 @@ class CreateAdminUsers < ActiveRecord::Migration
       t.string :realname
       t.string :password_digest
       t.string :email
-
+      
       t.timestamps null: false
     end
   end

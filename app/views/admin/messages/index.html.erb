@@ -16,7 +16,7 @@
     <tr>
       <th></th>
       <th>标题</th>
-      <th>摘要</th>
+      <!-- <th>摘要</th> -->
       <th>作者</th>
       <th>标签</th>
       <th>分类</th>
@@ -32,10 +32,10 @@
           <input type="checkbox" class="p_checkbox" value="<%= admin_message.id %>">
         </td>
         <td><%= admin_message.title %></td>
-        <td><%= admin_message.abstract %></td>
+        <!-- <td><%= admin_message.abstract %></td> -->
         <td><%= admin_message.author %></td>
         <td><%= admin_message.tag %></td>
-        <td><%= admin_message.category %></td>
+        <td><%= admin_message.category.name %></td>
         <td>
           <div class="dropdown">
             <a id="btn1" class="btn btn-link" type="button" data-toggle="dropdown">

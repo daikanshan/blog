@@ -1,33 +1,28 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
+  <strong>标题:</strong>
   <%= @admin_message.title %>
 </p>
 
 <p>
-  <strong>Content:</strong>
+  <strong>内容:</strong>
   <%= @admin_message.content %>
 </p>
 
 <p>
-  <strong>Abstract:</strong>
-  <%= @admin_message.abstract %>
-</p>
-
-<p>
-  <strong>Author:</strong>
+  <strong>作者:</strong>
   <%= @admin_message.author %>
 </p>
 
 <p>
-  <strong>Tag:</strong>
+  <strong>标签:</strong>
   <%= @admin_message.tag %>
 </p>
 
 <p>
-  <strong>Category:</strong>
-  <%= @admin_message.category %>
+  <strong>分类:</strong>
+  <%= @admin_message.category.name %>
 </p>
 
 <p>

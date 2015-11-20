@@ -11,38 +11,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151117111807) do
+ActiveRecord::Schema.define(version: 20151118115056) do
 
   create_table "admin_categories", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "code",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name",        limit: 255
+    t.string   "code",        limit: 255
+    t.integer  "father_id",   limit: 4
+    t.integer  "weight",      limit: 4
+    t.integer  "level",       limit: 4
+    t.integer  "category_id", limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "admin_comments", force: :cascade do |t|
     t.integer  "from",       limit: 4
     t.integer  "to",         limit: 4
     t.text     "content",    limit: 65535
+    t.integer  "user_id",    limit: 4
+    t.integer  "message_id", limit: 4
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
 
   create_table "admin_messages", force: :cascade do |t|
-    t.string   "title",      limit: 255
-    t.text     "content",    limit: 65535
-    t.string   "abstract",   limit: 255
-    t.string   "author",     limit: 255
-    t.string   "tag",        limit: 255
-    t.string   "category",   limit: 255
-    t.integer  "user_id",    limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "title",       limit: 255
+    t.text     "content",     limit: 65535
+    t.string   "abstract",    limit: 255
+    t.string   "author",      limit: 255
+    t.string   "tag",         limit: 255
+    t.string   "category",    limit: 255
+    t.integer  "user_id",     limit: 4
+    t.integer  "category_id", limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  create_table "admin_messages_tags", id: false, force: :cascade do |t|
+    t.integer "message_id", limit: 4
+    t.integer "tag_id",     limit: 4
   end
 
   create_table "admin_tags", force: :cascade do |t|
     t.string   "name",       limit: 255
-    t.integer  "code",       limit: 4
+    t.string   "code",       limit: 255
+    t.integer  "weight",     limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end

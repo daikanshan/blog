@@ -54,9 +54,19 @@ class Admin::UsersController < AdminController
   # DELETE /admin/users/1
   # DELETE /admin/users/1.json
   def destroy
-    @admin_user.destroy
+    begin
+      @admin_user.destroy
+      flash[:notice] = "用户 #{@admin_user.name} 已删除"
+    rescue Exception => e
+      flash[:notice] = e.message
+      respond_to do |format|
+        format.html { redirect_to admin_users_url,notice:e.message}
+        format.json { head :no_content }
+      end
+      return
+    end
     respond_to do |format|
-      format.html { redirect_to admin_users_url, notice: "用户<#{@admin_user.username}>删除成功！" }
+      format.html { redirect_to admin_users_url, notice: "操作成功！" }
       format.json { head :no_content }
     end
   end
@@ -70,11 +80,8 @@ class Admin::UsersController < AdminController
       end
     else
       user_ids.each do |id|
-        Admin::User.find(id).destroy
-      end
-      respond_to do |format|
-        format.html { redirect_to admin_users_url,notice:'操作成功！'}
-        format.json { head :no_content }
+        @admin_user = Admin::User.find(id)
+        self.destroy
       end
     end
   end

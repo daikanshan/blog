@@ -15,20 +15,28 @@ class Admin::MessagesController < AdminController
   # GET /admin/messages/new
   def new
     @admin_message = Admin::Message.new
+    @categories = Admin::Category.all.order('code')
   end
 
   # GET /admin/messages/1/edit
   def edit
+    @categories = Admin::Category.all.order('code')
   end
 
   # POST /admin/messages
   # POST /admin/messages.json
   def create
-    user = Admin::User.find(params[:admin_message][:user_id])
-    @admin_message = user.messages.new(admin_message_params)
-
+    prms = admin_message_params
+    prms[:abstract] = prms[:content][0,10]
+    @admin_message = Admin::Message.new(prms)
     respond_to do |format|
       if @admin_message.save
+        tags = prms[:tag].split(",")
+        if tags
+          tags.each do |tagName|
+            @admin_message.add_tag(tagName)
+          end
+        end
         format.html { redirect_to @admin_message, notice: 'Message was successfully created.' }
         format.json { render :show, status: :created, location: @admin_message }
       else
@@ -41,8 +49,10 @@ class Admin::MessagesController < AdminController
   # PATCH/PUT /admin/messages/1
   # PATCH/PUT /admin/messages/1.json
   def update
+    prms = admin_message_params
+    prms[:abstract] = prms[:content].strip[0,10]
     respond_to do |format|
-      if @admin_message.update(admin_message_params)
+      if @admin_message.update(prms)
         format.html { redirect_to @admin_message, notice: 'Message was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_message }
       else
@@ -86,6 +96,7 @@ class Admin::MessagesController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_message_params
-      params.require(:admin_message).permit(:title, :content, :abstract, :author, :tag, :category, :user_id)
+      params.require(:admin_message).permit(:title, :content, :author, :tag, :category_id, :user_id)
     end
+
 end

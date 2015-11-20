@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
+  root 'admin/index#index'
+  get 'admin' => 'admin/index#index'
   namespace :admin do
     resources :tags
-  end
-  namespace :admin do
     resources :comments
     resources :categories
     resources :messages do
@@ -17,11 +17,10 @@ Rails.application.routes.draw do
     end
     get 'index/index'
     get 'config/index'
-    get 'session/new'
-    post 'session/create'
+    get 'login' => 'session#new'
+    post 'login' => 'session#create'
   end
-  root 'admin/index#index'
-  get 'admin' => 'admin/index#index'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

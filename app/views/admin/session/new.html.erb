@@ -1,2 +1,38 @@
-<h1>Admin::Session#new</h1>
-<p>Find me in app/views/admin/session/new.html.erb</p>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>后台登陆</title>
+  <%= stylesheet_link_tag    'admin', media: 'all' %>
+  <%= javascript_include_tag 'admin' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="header">
+    This is the header
+  </div>
+
+  <div class="mainer">
+    <div class="login_panel col-sm-4 col-sm-offset-4">
+      <%= form_tag admin_login_path do %>
+        <div class="form-group">
+          <%= label_tag "name", "用户名" %><br>
+          <%= text_field_tag :username,'', class:"form-control" %>
+        </div>
+        <div class="form-group">
+          <%= label_tag "password", "密码" %><br>
+          <%= password_field_tag :password ,'', class:"form-control" %>
+        </div>
+        <div class="form-group">
+          <%= submit_tag "登录",class:"btn btn-block btn-default" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="footer">
+
+  </div>
+
+  <%= javascript_include_tag params[:controller] %>
+</body>
+</html>
