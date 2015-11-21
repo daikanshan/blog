@@ -1,10 +1,11 @@
 class Admin::CategoriesController < AdminController
   before_action :set_admin_category, only: [:show, :edit, :update, :destroy]
   before_action :handle_params,only: [:create,:update]
+  before_action :get_super_path,only: [:index, :new]
   # GET /admin/categories
   # GET /admin/categories.json
   def index
-    @admin_categories = Admin::Category.where(father_id:0)
+    @admin_categories = Admin::Category.where(father_id:params[:father_id].nil? ? 0 : params[:father_id])
   end
 
   # GET /admin/categories/1
@@ -20,6 +21,9 @@ class Admin::CategoriesController < AdminController
 
   # GET /admin/categories/1/edit
   def edit
+    @father_id = Admin::Category.find(params[:id]).father_id
+    @father_id = nil if @father_id ==0
+    @super_path = request.referer
     @categories = Admin::Category.all.where.not(id:@admin_category.id).order('code')
   end
 
@@ -63,7 +67,23 @@ class Admin::CategoriesController < AdminController
       format.json { head :no_content }
     end
   end
-
+  def batch_destroy
+    category_ids = params[:id].split(",").flatten
+    if category_ids.nil?||category_ids.empty?
+      respond_to do |format|
+        format.html { redirect_to admin_categories_url,notice:'未选择分类！'}
+        format.json { head :no_content }
+      end
+    else
+      category_ids.each do |id|
+        Admin::Category.find(id).destroy
+      end
+      respond_to do |format|
+        format.html { redirect_to admin_categories_url,notice:'操作成功！'}
+        format.json { head :no_content }
+      end
+    end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_admin_category
@@ -90,7 +110,16 @@ class Admin::CategoriesController < AdminController
       end
       prms
     end
-
+    def get_super_path
+      if params[:father_id].nil? #顶级目录
+        @super_path = admin_categories_path if params[:action]=="new"
+      else
+        @super_path = admin_categories_path
+        @father_id = params[:father_id]
+        grandpa_id = Admin::Category.find(@father_id).father_id
+        @super_path+="?father_id=#{grandpa_id}" if grandpa_id!=0
+      end
+    end
     def get_level_max(id)
       max = 0
       if id!=0 #非顶级目录

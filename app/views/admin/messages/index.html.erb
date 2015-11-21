@@ -1,10 +1,18 @@
 <p id="notice"><%= notice %></p>
 
-<h1>文章列表</h1>
+<h1>文章管理</h1>
 <div class="quick_option btn-group" role="group" base-url="<%= admin_messages_url %>">
   <a href="<%= new_admin_message_path %>" data-method="get" rel="nofollow" class="btn btn-default">
     <i class="glyphicon glyphicon-plus"></i>
-    新建文章
+    写文章
+  </a>
+  <a id="view" class="btn btn-default" disabled="disabled">
+    <i class="glyphicon glyphicon-align-justify"></i>
+    详细信息
+  </a>
+  <a id="edit" class="btn btn-default" disabled="disabled">
+    <i class="glyphicon glyphicon-pencil"></i>
+    编辑
   </a>
   <a id="del" rel="nofollow" class="btn btn-default" disabled="disabled">
     <i class="glyphicon glyphicon-trash"></i>
@@ -14,7 +22,9 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th></th>
+      <th>
+        <input type="checkbox" class="p_checkbox" id="check_all">
+      </th>
       <th>标题</th>
       <!-- <th>摘要</th> -->
       <th>作者</th>
@@ -31,11 +41,18 @@
         <td>
           <input type="checkbox" class="p_checkbox" value="<%= admin_message.id %>">
         </td>
-        <td><%= admin_message.title %></td>
+        <td><%= link_to admin_message.title,edit_admin_message_path(admin_message) %></td>
         <!-- <td><%= admin_message.abstract %></td> -->
-        <td><%= admin_message.author %></td>
-        <td><%= admin_message.tag %></td>
-        <td><%= admin_message.category.name %></td>
+        <td><%= link_to admin_message.author,admin_messages_path+"/?user=#{admin_message.author}" %></td>
+        <td>
+          <% tags = admin_message.tags %>
+          <% if !tags.nil? %>
+            <% tags.each do |tag| %>
+              <%= link_to tag.name,admin_messages_path+"/?tag=#{tag.name}" %>
+            <% end %>
+          <% end %>
+        </td>
+        <td><%= link_to admin_message.category,admin_messages_path+"/?category=#{admin_message.category}" %></td>
         <td>
           <div class="dropdown">
             <a id="btn1" class="btn btn-link" type="button" data-toggle="dropdown">

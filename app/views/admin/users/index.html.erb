@@ -1,10 +1,18 @@
 <p id="notice"><%= notice %></p>
 
-<h1>用户列表</h1>
+<h1>用户管理</h1>
 <div class="quick_option btn-group" role="group" base-url="<%= admin_users_url %>">
   <a href="<%= new_admin_user_path %>" data-method="get" rel="nofollow" class="btn btn-default">
     <i class="glyphicon glyphicon-plus"></i>
     新建用户
+  </a>
+  <a id="view" class="btn btn-default" disabled="disabled">
+    <i class="glyphicon glyphicon-align-justify"></i>
+    详细信息
+  </a>
+  <a id="edit" class="btn btn-default" disabled="disabled">
+    <i class="glyphicon glyphicon-pencil"></i>
+    编辑
   </a>
   <a id="del" rel="nofollow" class="btn btn-default" disabled="disabled">
     <i class="glyphicon glyphicon-trash"></i>
@@ -14,7 +22,9 @@
 <table class="table table-hover">
   <thead>
     <tr class="">
-      <th></th>
+      <th>
+        <input type="checkbox" class="p_checkbox" id="check_all">
+      </th>
       <th>用户名</th>
       <th>姓名</th>
       <th>邮箱</th>
@@ -28,8 +38,7 @@
         <td>
           <input type="checkbox" class="p_checkbox" value="<%= admin_user.id %>">
         </td>
-        <td><%= admin_user.id %></td>
-        <td><%= admin_user.username %></td>
+        <td><%= link_to admin_user.username,admin_user_path(admin_user) %></td>
         <td><%= admin_user.realname %></td>
         <td><%= admin_user.email %></td>
         <td>

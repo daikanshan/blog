@@ -6,7 +6,6 @@ class CreateAdminCategories < ActiveRecord::Migration
       t.integer :father_id
       t.integer :weight
       t.integer :level
-      t.integer :category_id
       t.timestamps null: false
     end
   end

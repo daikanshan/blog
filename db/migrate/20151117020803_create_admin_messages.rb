@@ -7,10 +7,8 @@ class CreateAdminMessages < ActiveRecord::Migration
       t.string :author
       t.string :tag
       t.string :category
-      
-      t.integer :user_id
-      t.integer :category_id
 
+      t.integer :user_id
       t.timestamps null: false
     end
   end

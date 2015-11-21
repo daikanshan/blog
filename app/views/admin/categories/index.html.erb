@@ -1,10 +1,21 @@
 <p id="notice"><%= notice %></p>
+<% if @super_path %>
+  <%= link_to '返回', @super_path %>
+<% end %>
 
 <h1>分类管理</h1>
 <div class="quick_option btn-group" role="group" base-url="<%= admin_categories_url %>">
   <a href="<%= new_admin_category_path %>" data-method="get" rel="nofollow" class="btn btn-default">
     <i class="glyphicon glyphicon-plus"></i>
     新建分类
+  </a>
+  <a id="view" class="btn btn-default" disabled="disabled">
+    <i class="glyphicon glyphicon-align-justify"></i>
+    详细信息
+  </a>
+  <a id="edit" class="btn btn-default" disabled="disabled">
+    <i class="glyphicon glyphicon-pencil"></i>
+    编辑
   </a>
   <a id="del" rel="nofollow" class="btn btn-default" disabled="disabled">
     <i class="glyphicon glyphicon-trash"></i>
@@ -14,6 +25,9 @@
 <table class="table table-hover">
   <thead>
     <tr>
+      <th>
+        <input type="checkbox" class="p_checkbox" id="check_all">
+      </th>
       <th>名称</th>
       <th>子分类</th>
       <th>文章数</th>
@@ -24,17 +38,25 @@
   <tbody>
     <% @admin_categories.each do |admin_category| %>
       <% admin_category_subs = Admin::Category.where(father_id:admin_category.id) %>
-      <tr>
-        <td><%= admin_category.name %></td>
+      <tr class="item_line">
+        <td>
+          <input type="checkbox" class="p_checkbox" value="<%= admin_category.id %>">
+        </td>
+        <% category_id = admin_category.id %>
+        <% category_name = admin_category.name %>
+        <td><%= link_to category_name,admin_messages_path+"/?category=#{category_name}" %></td>
 
         <% count =  admin_category_subs.count %>
         <% if count==0 %>
-        <td><%= link_to "新增" %></td>
+        <td><%= link_to "新增", new_admin_category_path+"?father_id=#{category_id}" %></td>
         <% else %>
-        <td><%= link_to count.to_s+"个子分类" %></td>
+        <td>
+          <%= link_to count.to_s+"个子分类",admin_categories_path+"?father_id=#{category_id}" %>/
+          <%= link_to "新增", new_admin_category_path+"?father_id=#{category_id}" %>
+        </td>
         <% end %>
 
-        <td><%= admin_category.messages.count %></td>
+        <td><%= link_to admin_category.messages.count,admin_messages_path+"/?category=#{category_name}" %></td>
         <td>
           <div class="dropdown">
             <a id="btn1" class="btn btn-link" type="button" data-toggle="dropdown">
@@ -44,7 +66,7 @@
             <ul class="dropdown-menu">
               <li><%= link_to '详细信息', admin_category %></li>
               <li><%= link_to '编辑', edit_admin_category_path(admin_category) %></li>
-              <li><%= link_to '删除', admin_category, method: :delete, data: { confirm: "确定要删除该用户？" } %></li>
+              <li><%= link_to '删除', admin_category, method: :delete, data: { confirm: "确定要删除该分类？" } %></li>
             </ul>
           </div>
         </td>

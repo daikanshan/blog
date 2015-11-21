@@ -60,7 +60,23 @@ class Admin::TagsController < AdminController
       format.json { head :no_content }
     end
   end
-
+  def batch_destroy
+    tag_ids = params[:id].split(",").flatten
+    if tag_ids.nil?||tag_ids.empty?
+      respond_to do |format|
+        format.html { redirect_to admin_tags_url,notice:'未选择分类！'}
+        format.json { head :no_content }
+      end
+    else
+      tag_ids.each do |id|
+        Admin::Tag.find(id).destroy
+      end
+      respond_to do |format|
+        format.html { redirect_to admin_tags_url,notice:'操作成功！'}
+        format.json { head :no_content }
+      end
+    end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_admin_tag

@@ -4,7 +4,17 @@ class Admin::MessagesController < AdminController
   # GET /admin/messages
   # GET /admin/messages.json
   def index
-    @admin_messages = Admin::Message.all
+    target = nil
+    if !params[:tag].nil?
+      target = Admin::Tag.find_by_name(params[:tag])
+    elsif !params[:category].nil?
+      target = Admin::Category.find_by_name(params[:category])
+    elsif !params[:user].nil?
+      target = Admin::User.find_by_username(params[:user])
+    else
+      @admin_messages = Admin::Message.all
+    end
+    @admin_messages = target.messages if !target.nil?
   end
 
   # GET /admin/messages/1
@@ -16,11 +26,22 @@ class Admin::MessagesController < AdminController
   def new
     @admin_message = Admin::Message.new
     @categories = Admin::Category.all.order('code')
+    if !@categories.nil?
+      @categories.each do |category|
+        category.name = "　"*category.level+category.name
+      end
+    end
   end
 
   # GET /admin/messages/1/edit
   def edit
     @categories = Admin::Category.all.order('code')
+    if !@categories.nil?
+      @categories.each do |category|
+        category.name = "　"*category.level+category.name
+      end
+    end
+
   end
 
   # POST /admin/messages
@@ -37,6 +58,7 @@ class Admin::MessagesController < AdminController
             @admin_message.add_tag(tagName)
           end
         end
+        @admin_message.add_category(prms[:category])
         format.html { redirect_to @admin_message, notice: 'Message was successfully created.' }
         format.json { render :show, status: :created, location: @admin_message }
       else
@@ -53,6 +75,13 @@ class Admin::MessagesController < AdminController
     prms[:abstract] = prms[:content].strip[0,10]
     respond_to do |format|
       if @admin_message.update(prms)
+        tags = prms[:tag].split(",")
+        if tags
+          tags.each do |tagName|
+            @admin_message.add_tag(tagName)
+          end
+        end
+        @admin_message.add_category(prms[:category])
         format.html { redirect_to @admin_message, notice: 'Message was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_message }
       else
@@ -96,7 +125,7 @@ class Admin::MessagesController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_message_params
-      params.require(:admin_message).permit(:title, :content, :author, :tag, :category_id, :user_id)
+      params.require(:admin_message).permit(:title, :content, :author, :tag, :category, :user_id)
     end
 
 end

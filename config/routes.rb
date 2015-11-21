@@ -2,9 +2,17 @@ Rails.application.routes.draw do
   root 'admin/index#index'
   get 'admin' => 'admin/index#index'
   namespace :admin do
-    resources :tags
+    resources :tags do
+      member do
+        delete :batch_destroy
+      end
+    end
     resources :comments
-    resources :categories
+    resources :categories do
+      member do
+        delete :batch_destroy
+      end
+    end
     resources :messages do
       member do
         delete :batch_destroy
