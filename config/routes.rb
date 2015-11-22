@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  root 'admin/index#index'
-  get 'admin' => 'admin/index#index'
+  root 'admin/home#index'
+  get 'admin' => 'admin/home#index'
   namespace :admin do
     resources :tags do
       member do
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
         delete :batch_destroy
       end
     end
-    get 'index/index'
+    get 'home/index'
     get 'config/index'
     get 'login' => 'session#new'
     post 'login' => 'session#create'

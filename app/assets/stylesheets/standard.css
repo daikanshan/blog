@@ -1,7 +1,0 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
-.header{
-  width:auto;
-  height:150px;
-  background-color: rgb(144, 122, 153)
-}

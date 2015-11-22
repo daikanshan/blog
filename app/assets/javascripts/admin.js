@@ -2,6 +2,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+
 jQuery.extend({
   once_click : function(base_url){
     $.set_delete_not_able();
@@ -88,6 +89,4 @@ $(document).on('page:change',function(){
     }
     $.once_click(base_url);
   });
-
-
 });
