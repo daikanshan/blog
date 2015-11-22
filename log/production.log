@@ -298,3 +298,19 @@ Mysql2::Error (Access denied for user 'root'@'localhost' (using password: NO)):
   /usr/local/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
 
 
+I, [2015-11-22T10:26:37.870305 #26690]  INFO -- : Started GET "/admin/categories" for 127.0.0.1 at 2015-11-22 10:26:37 +0800
+I, [2015-11-22T10:26:37.896082 #26690]  INFO -- : Processing by Admin::CategoriesController#index as HTML
+D, [2015-11-22T10:26:37.909998 #26690] DEBUG -- :   [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM `admin_users`[0m
+D, [2015-11-22T10:26:37.912365 #26690] DEBUG -- :   [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM `admin_categories`
+I, [2015-11-22T10:26:37.913899 #26690]  INFO -- : Redirected to http://localhost:3000/admin/login
+I, [2015-11-22T10:26:37.914029 #26690]  INFO -- : Filter chain halted as :check_login rendered or redirected
+I, [2015-11-22T10:26:37.914204 #26690]  INFO -- : Completed 302 Found in 18ms (ActiveRecord: 1.9ms)
+I, [2015-11-22T10:26:37.922161 #26690]  INFO -- : Started GET "/admin/login" for 127.0.0.1 at 2015-11-22 10:26:37 +0800
+I, [2015-11-22T10:26:37.924192 #26690]  INFO -- : Processing by Admin::SessionController#new as HTML
+D, [2015-11-22T10:26:37.925672 #26690] DEBUG -- :   [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM `admin_users`[0m
+D, [2015-11-22T10:26:37.926435 #26690] DEBUG -- :   [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM `admin_categories`
+I, [2015-11-22T10:26:50.053017 #26690]  INFO -- :   Rendered admin/session/new.html.erb (12123.5ms)
+I, [2015-11-22T10:26:50.053468 #26690]  INFO -- : Completed 200 OK in 12129ms (Views: 12125.2ms | ActiveRecord: 0.3ms)
+I, [2015-11-22T10:26:50.142879 #26690]  INFO -- : Started GET "/assets/admin-f0e3fc7539747500c6df7c66b6d1fa1ed8363e46f045ef60ca2316ed6a2ccefe.css" for 127.0.0.1 at 2015-11-22 10:26:50 +0800
+I, [2015-11-22T10:26:50.147855 #26690]  INFO -- : Started GET "/assets/admin-da027a016eadcd682e501d016ca5c8eeea275397bc6ad7cb4273423108d5e1f5.js" for 127.0.0.1 at 2015-11-22 10:26:50 +0800
+I, [2015-11-22T10:26:50.164756 #26690]  INFO -- : Started GET "/assets/admin/session-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js" for 127.0.0.1 at 2015-11-22 10:26:50 +0800
