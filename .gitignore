@@ -16,7 +16,8 @@
 # config
 /config/database.yml
 /config/secrets.yml
-
+/tmp/pids
+/tmp/cache
 # Public目录下的Uploads目录不会上传
 /public/uploads
 /public/assets

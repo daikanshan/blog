@@ -4,6 +4,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require ckeditor/init
 $(document).on('page:change',function(){
     $("ul.subnav").each(function(){
       //控制子菜单宽度

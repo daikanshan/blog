@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  mount Ckeditor::Engine => '/ckeditor'
   namespace :front do
 
   end
@@ -44,7 +45,6 @@ Rails.application.routes.draw do
     get 'login' => 'session#new'
     post 'login' => 'session#create'
   end
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
