@@ -1,6 +1,7 @@
 class Admin::User < ActiveRecord::Base
   has_many :messages
   has_many :comments
+  has_many :navs,class_name:"Front::Nav"
   validates :username, presence:true,length:{maximum:30}
   validates :realname, presence:true,length:{maximum:15}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/

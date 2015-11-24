@@ -1,0 +1,15 @@
+<% if nav.level==0 %>
+  <li class="">
+<% else %>
+  <li class="">
+<% end %>
+  <% if nav.subnavs.count==0 %>
+    <%= link_to nav.text,nav.url %>
+    <%= render(nav.subnavs) %>
+  <% else %>
+    <a href=<%= nav.url %>><%= nav.text %><span class="glyphicon glyphicon-menu-down"></span></a>
+    <ul class="subnav ">
+      <%= render(nav.subnavs) %>
+    </ul>
+  <% end %>
+</li>

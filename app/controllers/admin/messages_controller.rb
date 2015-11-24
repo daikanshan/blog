@@ -25,23 +25,14 @@ class Admin::MessagesController < AdminController
   # GET /admin/messages/new
   def new
     @admin_message = Admin::Message.new
-    @categories = Admin::Category.all.order('code')
-    if !@categories.nil?
-      @categories.each do |category|
-        category.name = "　"*category.level+category.name
-      end
-    end
+    @categories = Admin::Category.all
   end
 
   # GET /admin/messages/1/edit
   def edit
-    @categories = Admin::Category.all.order('code')
-    if !@categories.nil?
-      @categories.each do |category|
-        category.name = "　"*category.level+category.name
-      end
-    end
-
+    message = Admin::Message.find_by_id(params[:id])
+    @category = message.category if !message.nil?
+    @categories = Admin::Category.all
   end
 
   # POST /admin/messages

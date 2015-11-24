@@ -1,0 +1,2 @@
+module Front::SearchHelper
+end

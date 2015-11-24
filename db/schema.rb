@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151120142549) do
+ActiveRecord::Schema.define(version: 20151122085145) do
 
   create_table "admin_categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -70,6 +70,20 @@ ActiveRecord::Schema.define(version: 20151120142549) do
     t.string   "email",           limit: 255
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+  end
+
+  create_table "front_navs", force: :cascade do |t|
+    t.string   "text",       limit: 255
+    t.integer  "user_id",    limit: 4
+    t.string   "url",        limit: 255
+    t.string   "icon",       limit: 255
+    t.integer  "shown",      limit: 4
+    t.string   "code",       limit: 255
+    t.integer  "supnav_id",  limit: 4
+    t.integer  "weight",     limit: 4
+    t.integer  "level",      limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
 end

@@ -4,6 +4,16 @@
 <% end %>
 
 <h1>分类管理</h1>
+<% if !@supcategory.nil? %>
+  <% if @supcategory.level==0 %>
+    <%# 属于顶级目录下的 要跳转到顶级目录 %>
+    <% path = admin_categories_path %>
+  <% else %>
+    <%# 因为supcategory存在，所以剩下的是二级目录以下的页面，跳转到其父级目录 %>
+    <% path = admin_categories_path+"/?father_id=#{@supcategory.supcategory.id}" %>
+  <% end %>
+  <%= link_to @supcategory.name, path %><br/>
+<% end %>
 <div class="quick_option btn-group" role="group" base-url="<%= admin_categories_url %>">
   <a href="<%= new_admin_category_path %>" data-method="get" rel="nofollow" class="btn btn-default">
     <i class="glyphicon glyphicon-plus"></i>

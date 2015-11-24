@@ -1,0 +1,17 @@
+
+nav:
+  -
+    text: 首页
+    icon: home
+    show: true
+    path: home/index
+  -
+    text: 关于
+    icon: info-sign
+    show: true
+    path: home/index
+  -
+    text: 后台
+    icon: user
+    show: true
+    path: admin/home

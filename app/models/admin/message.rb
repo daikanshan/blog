@@ -29,7 +29,7 @@ class Admin::Message < ActiveRecord::Base
         categories<<current_category
         father_id = current_category.father_id
         current_category = Admin::Category.find_by_id(father_id)
-      end while father_id!=0
+      end while !father_id.nil?
     end
   end
   def remove_category(categoryName)
@@ -41,7 +41,7 @@ class Admin::Message < ActiveRecord::Base
         categories.delete(current_category)
         father_id = current_category.father_id
         current_category = Admin::Category.find_by_id(father_id)
-      end while father_id!=0
+      end while !father_id.nil?
     end
   end
 end

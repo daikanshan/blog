@@ -2,10 +2,16 @@ class Admin::CategoriesController < AdminController
   before_action :set_admin_category, only: [:show, :edit, :update, :destroy]
   before_action :handle_params,only: [:create,:update]
   before_action :get_super_path,only: [:index, :new]
+  before_action :after_destroy_return_path, only: [:destroy,:batch_destroy]
+  before_action :set_supcategory,only: [:index]
   # GET /admin/categories
   # GET /admin/categories.json
   def index
-    @admin_categories = Admin::Category.where(father_id:params[:father_id].nil? ? 0 : params[:father_id])
+    if !@supcategory.nil?
+      @admin_categories = @supcategory.subcategories
+    else
+      @admin_categories = Admin::Category.where(level:0)
+    end
   end
 
   # GET /admin/categories/1
@@ -16,15 +22,14 @@ class Admin::CategoriesController < AdminController
   # GET /admin/categories/new
   def new
     @admin_category = Admin::Category.new
-    @categories = Admin::Category.all.order('code')
+    @categories = Admin::Category.all
   end
 
   # GET /admin/categories/1/edit
   def edit
     @father_id = Admin::Category.find(params[:id]).father_id
-    @father_id = nil if @father_id ==0
     @super_path = request.referer
-    @categories = Admin::Category.all.where.not(id:@admin_category.id).order('code')
+    @categories = Admin::Category.all.where.not(id:@admin_category.id)
   end
 
   # POST /admin/categories
@@ -34,7 +39,8 @@ class Admin::CategoriesController < AdminController
 
     respond_to do |format|
       if @admin_category.save
-        format.html { redirect_to @admin_category, notice: 'Category was successfully created.' }
+
+        format.html { redirect_to return_path(@admin_category), notice: 'Category was successfully created.' }
         format.json { render :show, status: :created, location: @admin_category }
       else
         format.html { render :new }
@@ -49,7 +55,7 @@ class Admin::CategoriesController < AdminController
 
     respond_to do |format|
       if @admin_category.update(handle_params)
-        format.html { redirect_to @admin_category, notice: 'Category was successfully updated.' }
+        format.html { redirect_to return_path(@admin_category), notice: 'Category was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_category }
       else
         format.html { render :edit }
@@ -61,9 +67,9 @@ class Admin::CategoriesController < AdminController
   # DELETE /admin/categories/1
   # DELETE /admin/categories/1.json
   def destroy
-    @admin_category.destroy
+    destroy_all_subs @admin_category.destroy
     respond_to do |format|
-      format.html { redirect_to admin_categories_url, notice: 'Category was successfully destroyed.' }
+      format.html { redirect_to @return_path, notice: 'Category was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -76,10 +82,10 @@ class Admin::CategoriesController < AdminController
       end
     else
       category_ids.each do |id|
-        Admin::Category.find(id).destroy
+        destroy_all_subs Admin::Category.find(id).destroy
       end
       respond_to do |format|
-        format.html { redirect_to admin_categories_url,notice:'操作成功！'}
+        format.html { redirect_to @return_path,notice:'操作成功！'}
         format.json { head :no_content }
       end
     end
@@ -89,7 +95,9 @@ class Admin::CategoriesController < AdminController
     def set_admin_category
       @admin_category = Admin::Category.find(params[:id])
     end
-
+    def set_supcategory
+      @supcategory = Admin::Category.find_by_id(params[:father_id])
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_category_params
       params.require(:admin_category).permit(:name, :father_id)
@@ -98,31 +106,29 @@ class Admin::CategoriesController < AdminController
     def handle_params
       prms = admin_category_params
       if prms[:father_id].nil?||prms[:father_id]==""
-        prms[:father_id],prms[:level] = 0,0
+        prms[:level] = 0
         max = get_level_max(prms[:father_id])
         prms[:weight] = max+1
-        prms[:code] = "0#{max+1}"
       else
         prms[:level] = Admin::Category.find(prms[:father_id]).level+1
         max = get_level_max(prms[:father_id])
         prms[:weight] = max+1
-        prms[:code] =Admin::Category.find(prms[:father_id]).code+prms[:level].to_s + prms[:weight].to_s
       end
       prms
     end
     def get_super_path
-      if params[:father_id].nil? #顶级目录
+      if params[:father_id].nil?||params[:father_id]=='' #顶级目录
         @super_path = admin_categories_path if params[:action]=="new"
       else
         @super_path = admin_categories_path
         @father_id = params[:father_id]
         grandpa_id = Admin::Category.find(@father_id).father_id
-        @super_path+="?father_id=#{grandpa_id}" if grandpa_id!=0
+        @super_path+="?father_id=#{grandpa_id}" if !grandpa_id.nil?
       end
     end
     def get_level_max(id)
       max = 0
-      if id!=0 #非顶级目录
+      if !id.nil? #非顶级目录
         temp = Admin::Category.where(father_id:id)
         if !temp.nil?
           temp.each do |i|
@@ -138,5 +144,31 @@ class Admin::CategoriesController < AdminController
         end
       end
       return max
+    end
+    def destroy_all_subs(category)
+      temp = []
+      category.subcategories.each do |sub|
+        temp.push(sub)
+      end
+      while !temp.empty?
+        cur = temp.shift
+        cur.subcategories.each do |sub|
+          temp.push(sub)
+        end
+        cur.destroy
+      end
+    end
+    def after_destroy_return_path
+      ids = params[:id].split(",").flatten
+      admin_category = Admin::Category.find(ids[0])
+      @return_path = admin_categories_path+"/?father_id=#{admin_category.father_id}"
+      @return_path = admin_categories_path if admin_category.level==1
+    end
+    def return_path(category)
+      if category.supcategory.nil? #父级分类为顶级分类
+        admin_categories_path
+      else
+        admin_categories_path+"/?father_id=#{category.father_id}"
+      end
     end
 end

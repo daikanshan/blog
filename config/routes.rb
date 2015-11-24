@@ -1,5 +1,21 @@
 Rails.application.routes.draw do
-  root 'admin/home#index'
+
+  namespace :front do
+
+  end
+  root 'front/home#index'
+
+  namespace :front do
+    resources :navs do
+      member do
+        delete :batch_destroy
+      end
+    end
+    get 'home/index'
+    get 'search/index',as: :search
+
+  end
+
   get 'admin' => 'admin/home#index'
   namespace :admin do
     resources :tags do
