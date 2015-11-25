@@ -3,6 +3,15 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :check_init
+
+  def check_login
+    if session[:user_id].nil?
+      respond_to do |format|
+        format.html { redirect_to admin_login_path}
+        format.json { head :no_content }
+      end
+    end
+  end
 private
   def check_init
     if Admin::User.count==0

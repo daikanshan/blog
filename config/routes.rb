@@ -44,6 +44,7 @@ Rails.application.routes.draw do
     get 'config/index'
     get 'login' => 'session#new'
     post 'login' => 'session#create'
+    post 'logout' => 'session#destroy'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,6 +1,9 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+body{
+  background-color: #EBEBEB;
+}
 .header{
   width:auto;
   height:150px;
@@ -44,4 +47,22 @@ ul.subnav li a{
 }
 ul li a span{
   padding-left: 5px;
+}
+
+// article CSS
+.article{
+  height:300px;
+  text-align: center;
+  margin-top: 40px;
+  background-color: white;
+}
+.article-title{
+  font-size: 2.5em;
+}
+.article-content{
+  margin-top: 20px;
+  text-align: left;
+}
+.article-content p{
+  font-size: 2.1em;
 }

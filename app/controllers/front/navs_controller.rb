@@ -1,4 +1,5 @@
 class Front::NavsController < FrontController
+  before_action :check_login
   before_action :set_front_nav, only: [:show, :edit, :update, :destroy]
   before_action :get_super_path, only: [:show, :new]
   # GET /front/navs

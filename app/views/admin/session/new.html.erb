@@ -4,15 +4,17 @@
   <meta charset="utf-8">
   <title>后台登陆</title>
   <%= stylesheet_link_tag    'admin', media: 'all' %>
+  <%= stylesheet_link_tag    'admin/session', media: 'all' %>
   <%= javascript_include_tag 'admin' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
   <div class="header">
-    This is the header
+
   </div>
 
-  <div class="mainer">
+  <div class="mainer ">
+    <h2>后台登陆</h2>
     <div class="login_panel col-sm-4 col-sm-offset-4">
       <%= form_tag admin_login_path do %>
         <div class="form-group">

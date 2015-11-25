@@ -17,6 +17,7 @@ class Admin::SessionController < AdminController
   end
 
   def destroy
-
+    session[:user_id] = session[:username] = nil
+    redirect_to admin_login_path
   end
 end
