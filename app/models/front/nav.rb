@@ -3,8 +3,7 @@ class Front::Nav < ActiveRecord::Base
                     foreign_key: "supnav_id"
   belongs_to :supnav, class_name: "Front::Nav"
   belongs_to :user, class_name: "Admin::User"
-  validates :title,presence:true
-  validates :content,presence:true
+  validates :text,presence:true
   def path
     controller, action = self.url.split('/')
     options = {controller: 'front/' + controller, action: action}
