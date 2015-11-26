@@ -1,5 +1,5 @@
 class Admin::CommentsController < AdminController
-  before_action :handle_params
+  before_action :handle_params,only: [:update,:create]
   # GET /admin/comments
   # GET /admin/comments.json
   def index
