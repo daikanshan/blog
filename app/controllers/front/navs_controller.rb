@@ -1,7 +1,8 @@
-class Front::NavsController < FrontController
+class Front::NavsController < AdminController
   before_action :check_login
   before_action :set_front_nav, only: [:show, :edit, :update, :destroy]
   before_action :get_super_path, only: [:show, :new]
+  layout "admin"
   # GET /front/navs
   # GET /front/navs.json
   def index
@@ -19,25 +20,14 @@ class Front::NavsController < FrontController
   # GET /front/navs/new
   def new
     @supnav_id = params[:id]
-
+    @front_navs = Front::Nav.all
     @front_nav = Front::Nav.new
-    @navs = Front::Nav.all.order('code')
-    if !@navs.nil?
-      @navs.each do |nav|
-        nav.text = "　"*nav.level+nav.text
-      end
-    end
   end
 
   # GET /front/navs/1/edit
   def edit
     @super_path = front_nav_path(Front::Nav.find_by_id(params[:id]))
-    @navs = Front::Nav.all.order('code')
-    if !@navs.nil?
-      @navs.each do |nav|
-        nav.text = "　"*nav.level+nav.text
-      end
-    end
+    @front_navs = Front::Nav.all
   end
 
   # POST /front/navs
@@ -121,11 +111,9 @@ class Front::NavsController < FrontController
         prms[:supnav_id] = nil
         prms[:level] = 0
         prms[:weight] = get_level_max(0)+1
-        prms[:code] = prms[:level].to_s+prms[:weight].to_s
       else
         prms[:level] = supnav.level+1
         prms[:weight] = get_level_max(supnav.level+1)+1
-        prms[:code] = supnav.code+prms[:level].to_s+prms[:weight].to_s
       end
       prms
     end

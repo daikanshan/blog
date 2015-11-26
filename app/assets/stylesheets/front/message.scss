@@ -1,3 +1,21 @@
 // Place all the styles related to the front::message controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.article{
+  height:300px;
+  text-align: center;
+  margin-top: 40px;
+  background-color: white;
+}
+.article-title{
+  font-size: 2.5em;
+}
+.article-content{
+  height:150px;
+  margin-top: 20px;
+  text-align: left;
+  overflow: hidden;
+}
+.article-content p{
+  font-size: 2.1em;
+}

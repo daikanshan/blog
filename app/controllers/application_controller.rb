@@ -21,7 +21,7 @@ private
       Admin::Category.create(name:'默认',weight:1,level:0,father_id:nil)
     end
     if Front::Nav.count==0
-      Front::Nav.create(text:'首页',weight:1,level:0,user_id:Admin::User.first.id,url:"home/index")
+      Front::Nav.create(text:'首页',weight:1,level:0,user_id:Admin::User.first.id,url:"/")
     end
   end
 end

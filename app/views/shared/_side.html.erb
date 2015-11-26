@@ -1,0 +1,32 @@
+<div>
+  <div class="side_part">
+    <p>最新文章</p>
+    <div class="">
+      <ul>
+        <% @latest_messages.each do |message| %>
+          <li><%= link_to message.title,message_path(message.title) %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="side_part">
+    <p>分类</p>
+    <div class="">
+      <ul>
+        <% @categories.each do |category| %>
+          <li><%= link_to category.name,messages_to_category_path(categoryname:category.name) %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="side_part">
+    <p>标签</p>
+    <div class="">
+      <ul>
+        <% @tags.each do |tag| %>
+          <li><%= link_to tag.name,messages_to_tag_path(tagname:tag.name) %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

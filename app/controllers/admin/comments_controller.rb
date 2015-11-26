@@ -1,6 +1,5 @@
 class Admin::CommentsController < AdminController
-  before_action :set_admin_comment, only: [:show, :edit, :update, :destroy]
-
+  before_action :handle_params
   # GET /admin/comments
   # GET /admin/comments.json
   def index
@@ -24,11 +23,11 @@ class Admin::CommentsController < AdminController
   # POST /admin/comments
   # POST /admin/comments.json
   def create
-    @admin_comment = Admin::Comment.new(admin_comment_params)
+    @admin_comment = Admin::Comment.new(handle_params)
 
     respond_to do |format|
       if @admin_comment.save
-        format.html { redirect_to @admin_comment, notice: 'Comment was successfully created.' }
+        format.html { redirect_to message_path(Admin::Message.find_by_id(handle_params[:message_id]).title), notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @admin_comment }
       else
         format.html { render :new }
@@ -66,9 +65,12 @@ class Admin::CommentsController < AdminController
     def set_admin_comment
       @admin_comment = Admin::Comment.find(params[:id])
     end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def admin_comment_params
-      params.require(:admin_comment).permit(:from, :to, :content)
+    def handle_params
+      prms = {};
+      prms[:visitname] = params[:username]
+      prms[:message_id] = params[:message_id]
+      prms[:email] = params[:email]
+      prms[:content] = params[:content][:info]
+      prms
     end
 end

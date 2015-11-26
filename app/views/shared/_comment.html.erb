@@ -1,0 +1,33 @@
+<%= javascript_include_tag "ckeditor/init" %>
+<p>
+  评论
+</p>
+<% @comments.each do |comment| %>
+  <%= comment.visitname %>
+  <%= comment.email %>
+  <%= comment.content.html_safe %>
+<% end %>
+<%= form_tag comment_path, method: :post, class: "" do %>
+  <%= text_field_tag(
+      :message_id,
+      params[:message_id],
+      value:@message.id,
+      class:"sr-only"
+  ) %>
+  <%= text_field_tag(
+      :username,
+      params[:username],
+      placeholder: "用户名",
+      class: "form-control"
+  ) %>
+  <%= text_field_tag(
+      :email,
+      params[:email],
+      placeholder: "邮箱",
+      class: "form-control"
+  ) %>
+  <div class="form-group">
+    <%= cktext_area :content, :info, :cols => 40, :ckeditor => {:uiColor => '#fefefe', :toolbar => 'mini'} %>
+  </div>
+  <%= submit_tag "评论" %>
+<% end %>

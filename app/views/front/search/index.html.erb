@@ -1,2 +1,19 @@
-<h1>Front::Search#index</h1>
-<p>Find me in app/views/front/search/index.html.erb</p>
+<% @messages.each do |msg| %>
+  <div class="outer col-sm-12">
+    <div class="articles col-sm-7 col-sm-offset-1">
+      <div class="articles-title">
+        <h1><%= link_to msg.title,message_path(title: msg.title) %></h1>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<% @users.each do |user| %>
+  <%= link_to user.username,messages_to_user_path(username:user.username) %>
+<% end %>
+<% @tags.each do |tag| %>
+  <%= link_to tag.name %>
+<% end %>
+<% @categories.each do |category| %>
+  <%= link_to category.name %>
+<% end %>

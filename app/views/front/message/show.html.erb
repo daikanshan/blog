@@ -1,0 +1,22 @@
+<%= stylesheet_link_tag 'front/message' %>
+  <div class="outer">
+    <div class="article col-sm-10 col-sm-offset-1">
+      <div class="article-title">
+        <h1><%= @message.title %></h1>
+      </div>
+      <div class="article-meta">
+        作者：<%= @message.user.username %>
+        标签：<%= @message.tag %>
+        分类：<%= @message.category %>
+        创建时间：<%= DateTime.parse(@message.created_at.to_s).strftime('%Y-%m-%d') %>
+      </div>
+      <div class="article-content">
+        <%= @message.content.html_safe %>
+      </div>
+      <div class="article-footer">
+      </div>
+    </div>
+    <div class="comment col-sm-10 col-sm-offset-1">
+      <%= render 'shared/comment',locals:{message_id:@message.id} %>
+    </div>
+  </div>

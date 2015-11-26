@@ -24,13 +24,17 @@ ActiveRecord::Schema.define(version: 20151124182658) do
   end
 
   create_table "admin_comments", force: :cascade do |t|
-    t.integer  "from",       limit: 4
-    t.integer  "to",         limit: 4
-    t.text     "content",    limit: 65535
-    t.integer  "user_id",    limit: 4
-    t.integer  "message_id", limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.integer  "from",          limit: 4
+    t.integer  "to",            limit: 4
+    t.text     "content",       limit: 65535
+    t.string   "email",         limit: 255
+    t.string   "visitname",     limit: 255
+    t.string   "visiturl",      limit: 255
+    t.integer  "user_id",       limit: 4
+    t.integer  "message_id",    limit: 4
+    t.integer  "supcomment_id", limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "admin_messages", force: :cascade do |t|

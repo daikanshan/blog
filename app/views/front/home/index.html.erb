@@ -1,8 +1,8 @@
 <% @messages.each do |msg| %>
-  <div class="outer col-sm-12">
-    <div class="articles col-sm-7 col-sm-offset-1">
+  <div class="outer">
+    <div class="articles col-sm-10 col-sm-offset-1">
       <div class="articles-title">
-        <h1><%= msg.title %></h1>
+        <h1><%= link_to msg.title,message_path(title: msg.title) %></h1>
       </div>
       <div class="articles-meta">
         作者：<%= msg.user.username %>
@@ -14,11 +14,10 @@
         <%= msg.content.html_safe %>
       </div>
       <div class="articles-footer">
-        <%= button_to "阅读全文", message_path(title: msg.title) ,method:'get' %>
+        <%= button_to "阅读全文", message_path(title: msg.title) ,
+                                  method:'get',
+                                  class:"btn btn-large btn-primary"%>
       </div>
-    </div>
-    <div class="right col-sm-3">
-
     </div>
   </div>
 <% end %>

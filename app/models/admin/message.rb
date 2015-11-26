@@ -2,6 +2,7 @@ class Admin::Message < ActiveRecord::Base
   belongs_to :user
   has_and_belongs_to_many :tags,join_table: 'admin_messages_tags'
   has_and_belongs_to_many :categories,join_table: 'admin_messages_categories'
+  has_many :comments
   validates :title,presence:true
   validates :content,presence:true
   def add_tag(tagName)
