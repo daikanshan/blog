@@ -1,17 +1,20 @@
 <% @messages.each do |msg| %>
   <div class="outer col-sm-12">
-    <div class="article col-sm-7 col-sm-offset-1">
-      <div class="article-title">
+    <div class="articles col-sm-7 col-sm-offset-1">
+      <div class="articles-title">
         <h1><%= msg.title %></h1>
       </div>
-      <div class="article-info">
+      <div class="articles-meta">
         作者：<%= msg.user.username %>
         标签：<%= msg.tag %>
         分类：<%= msg.category %>
         创建时间：<%= DateTime.parse(msg.created_at.to_s).strftime('%Y-%m-%d') %>
       </div>
-      <div class="article-content">
+      <div class="articles-content">
         <%= msg.content.html_safe %>
+      </div>
+      <div class="articles-footer">
+        <%= button_to "阅读全文", message_path(title: msg.title) ,method:'get' %>
       </div>
     </div>
     <div class="right col-sm-3">

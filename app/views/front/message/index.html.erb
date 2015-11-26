@@ -1,0 +1,22 @@
+
+  <div class="outer col-sm-12">
+    <div class="articles col-sm-7 col-sm-offset-1">
+      <div class="articles-title">
+        <h1><%= @message.title %></h1>
+      </div>
+      <div class="article-meta">
+        作者：<%= @message.user.username %>
+        标签：<%= @message.tag %>
+        分类：<%= @message.category %>
+        创建时间：<%= DateTime.parse(@message.created_at.to_s).strftime('%Y-%m-%d') %>
+      </div>
+      <div class="article-content">
+        <%= @message.content.html_safe %>
+      </div>
+      <div class="article-footer">
+
+    </div>
+    <div class="right col-sm-3">
+
+    </div>
+  </div>
