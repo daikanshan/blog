@@ -2,11 +2,11 @@
 <% if @messages.count!=0 %>
   <% @messages.each do |msg| %>
     <div class="outer">
-      <div class="articles col-sm-10 col-sm-offset-1">
+      <!-- <div class="articles col-sm-10 col-sm-offset-1"> -->
         <div class="articles-title">
           <h1><%= link_to msg.title,message_path(title: msg.title) %></h1>
         </div>
-      </div>
+      <!-- </div> -->
     </div>
   <% end %>
 <% else %>
