@@ -25,8 +25,8 @@ body{
     // -webkit-border-radius:10px;
     // border-radius:10px;
     border-radius: 0;
-    -webkit-box-shadow:0 0 1px rgba(11, 11, 11, 0.78);
-    -moz-box-shadow:0 0 1px rgba(11, 11, 11, 0.78);
+    -webkit-box-shadow:0 0 2px rgba(11, 11, 11, 0.78);
+    -moz-box-shadow:0 0 2px rgba(11, 11, 11, 0.78);
   }
   ul.topnav {
     font-size: 1.2em;
@@ -76,7 +76,7 @@ body{
 }
 
 // article CSS
-.articles{
+.articles, .comment{
   width:80%;
   height:auto;
   text-align: center;
@@ -115,8 +115,21 @@ body{
             "Droid Sans Fallback",
             "Microsoft YaHei",
             sans-serif;
-
     }
+  }
+
+  // comment
+  p{
+    text-align: left;
+    font-size: 26px;
+  }
+  .visitname{
+    text-align: left;
+    font-size: 20px;
+  }
+  .content{
+    text-align: left;
+    font-size: 15px;
   }
 }
 
@@ -135,6 +148,7 @@ body{
     padding-top:15px;
     padding-left:20px;
     font-size: 1.2em;
+    font-size: 26px;
   }
   hr{
     padding:0;
@@ -144,13 +158,81 @@ body{
     padding-top:10px;
     padding-bottom: 20px;
     padding-left:20px;
-    ul li{
-      border:none;
+    ul{
+      list-style:none;
+      font:400 18px/1.62 "Georgia",
+            "Xin Gothic",
+            "Hiragino Sans GB",
+            "Droid Sans Fallback",
+            "Microsoft YaHei",
+            sans-serif;
+      li{
+        border:none;
+      }
+    }
+    .badge{
+      background-color: white;
+    }
+    .label{
+      border:1px,solid,#CCC;
+      background-color: white;
+      color:#959595;
     }
   }
 }
 // 脚部设置
 .footer{
+  float:left;
   width:100%;
-  bottom:5px;
+  margin-top: 70px;
+  margin-bottom: 30px;
+  text-align: center;
+  .upupup{
+    display: none;
+    position: fixed;
+    right:30px;
+    bottom:100px;
+    .btn{
+      border: none;
+      border-radius: 100%;
+    }
+  }
+}
+
+//颜色设置
+html{
+  .main{
+    .middle{
+      .articles{
+        .articles-title{
+          a{
+            color:black;
+            text-decoration: none;
+          }
+
+        }
+      }
+      .more{
+        color:white;
+        background-color: #E67E22;
+      }
+      .more:hover{
+        background-color:black;
+      }
+    }
+    .side{
+      a{
+        color:#E67E22;
+        text-decoration: none;
+      }
+    }
+  }
+  .footer{
+    .upupup{
+      button{
+        color:white;
+        background-color: #E67E22;
+      }
+    }
+  }
 }

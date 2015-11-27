@@ -1,19 +1,19 @@
 <%= stylesheet_link_tag 'front/message' %>
   <div class="outer">
-    <div class="article">
-      <div class="article-title">
+    <div class="articles">
+      <div class="articles-title">
         <h1><%= @message.title %></h1>
       </div>
-      <div class="article-meta">
+      <div class="articles-meta">
         作者：<%= @message.user.username %>
         标签：<%= @message.tag %>
         分类：<%= @message.category %>
         创建时间：<%= DateTime.parse(@message.created_at.to_s).strftime('%Y-%m-%d') %>
       </div>
-      <div class="article-content">
+      <div class="articles-content">
         <%= @message.content.html_safe %>
       </div>
-      <div class="article-footer">
+      <div class="articles-footer">
       </div>
     </div>
     <div class="comment">

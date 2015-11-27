@@ -3,7 +3,9 @@
 <head>
   <meta charset="utf-8">
   <title>Front</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= stylesheet_link_tag    'front', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= javascript_include_tag 'front' %>
   <%= csrf_meta_tags %>
 </head>
@@ -25,7 +27,5 @@
   <div class="footer">
     <%= render 'shared/footer' %>
   </div>
-
-  <%= javascript_include_tag params[:controller] %>
 </body>
 </html>
