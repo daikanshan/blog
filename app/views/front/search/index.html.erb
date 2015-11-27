@@ -1,6 +1,7 @@
-<% @messages.each do |msg| %>
-  <div class="outer col-sm-12">
-    <div class="articles col-sm-7 col-sm-offset-1">
+<%= stylesheet_link_tag 'front/search' %>
+<% @search_messages.each do |msg| %>
+  <div class="outer">
+    <div class="articles">
       <div class="articles-title">
         <h1><%= link_to msg.title,message_path(title: msg.title) %></h1>
       </div>
@@ -8,12 +9,12 @@
   </div>
 <% end %>
 
-<% @users.each do |user| %>
+<% @search_users.each do |user| %>
   <%= link_to user.username,messages_to_user_path(username:user.username) %>
 <% end %>
-<% @tags.each do |tag| %>
+<% @search_tags.each do |tag| %>
   <%= link_to tag.name %>
 <% end %>
-<% @categories.each do |category| %>
+<% @search_categories.each do |category| %>
   <%= link_to category.name %>
 <% end %>

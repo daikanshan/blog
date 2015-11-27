@@ -39,7 +39,7 @@ class Admin::MessagesController < AdminController
   # POST /admin/messages.json
   def create
     prms = admin_message_params
-    prms[:abstract] = prms[:content][0,10]
+    prms[:abstract] = prms[:content][0,100]
     @admin_message = Admin::Message.new(prms)
     respond_to do |format|
       if @admin_message.save

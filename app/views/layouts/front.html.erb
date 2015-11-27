@@ -9,17 +9,17 @@
 </head>
 <body>
   <div class="header">
+    <%= render 'shared/top' %>
     <%= render 'shared/header' %>
   </div>
 
-  <div class="main col-sm-12">
-    <div class="middle col-sm-9">
+  <div class="main">
+    <div class="middle">
       <%= yield %>
     </div>
-    <div class="middle col-sm-3">
+    <div class="side">
       <%= render 'shared/side' %>
     </div>
-
   </div>
 
   <div class="footer">

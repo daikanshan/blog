@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag 'front/message' %>
   <div class="outer">
-    <div class="article col-sm-10 col-sm-offset-1">
+    <div class="article">
       <div class="article-title">
         <h1><%= @message.title %></h1>
       </div>
@@ -16,7 +16,7 @@
       <div class="article-footer">
       </div>
     </div>
-    <div class="comment col-sm-10 col-sm-offset-1">
+    <div class="comment">
       <%= render 'shared/comment',locals:{message_id:@message.id} %>
     </div>
   </div>

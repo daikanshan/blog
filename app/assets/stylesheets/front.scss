@@ -5,75 +5,151 @@ body{
   background-color: #EBEBEB;
 }
 .header{
-
-  width:auto;
-  height:150px;
-  background-color: rgb(144, 122, 153)
-}
-.mainer{
   width:auto;
   height:auto;
+  background-image: url("top.jpg");
+  background-repeat:no-repeat;
+  background-size:cover;
+  // 顶部图片
+  .imgPart{
+    width:100%;
+    height:250px;
+    .logo{
+      position: absolute;
+      left:48%;
+      top:120px;
+    }
+  }
+  .navbar{
+    // -moz-border-radius:10px;
+    // -webkit-border-radius:10px;
+    // border-radius:10px;
+    border-radius: 0;
+    -webkit-box-shadow:0 0 1px rgba(11, 11, 11, 0.78);
+    -moz-box-shadow:0 0 1px rgba(11, 11, 11, 0.78);
+  }
+  ul.topnav {
+    font-size: 1.2em;
+  }
+  ul.subnav{
+    z-index: 99;
+    // border-radius: 10px;
+    margin-top: 0;
+    display: none;
+    position: absolute;
+    list-style: none;
+    float: left;
+    padding: 0;
+    padding-top: 3px;
+    li{
+      border-radius: 10px;
+      background-color: #F8F8F8;
+      height:40px;
+      width:100px;
+      float: left;
+      padding-top: 1px;
+      a{
+        padding-left: 15px;
+        display: block;
+        line-height: 40px;
+        text-decoration:none;
+        span{
+          padding-left: 5px;
+        }
+      }
+    }
+  }
+}
+//body
+.main{
+  width:100%;
+  height: auto;
+  float: left;
+  .middle{
+    float: left;
+    width:70%;
+  }
+  .side{
+    float: right;
+    width:30%;
+  }
 }
 
-.quick_option form{
-  float: left;
-}
-ul.topnav {
-  font-size: 1.2em;
-}
-
-ul.subnav{
-  z-index: 99;
-  // border-radius: 10px;
-  margin-top: 0;
-  display: none;
-  position: absolute;
-  list-style: none;
-  float: left;
-  padding: 0;
-  padding-top: 3px;
-}
-ul.subnav li{
-  border-radius: 10px;
-  background-color: #F8F8F8;
-  height:40px;
-  width:100px;
-  float: left;
-  padding-top: 1px;
-}
-ul.subnav li a{
-  padding-left: 15px;
-  display: block;
-  line-height: 40px;
-  text-decoration:none;
-}
-ul li a span{
-  padding-left: 5px;
-}
-
-.mainer{
-  width:auto;
-  height:auto;
-}
 // article CSS
 .articles{
-  height:300px;
+  width:80%;
+  height:auto;
   text-align: center;
   margin-top: 40px;
+  margin-left: 10%;
   background-color: white;
+
+  -moz-border-radius:10px;
+  -webkit-border-radius:10px;
+  border-radius:10px;
+  -webkit-box-shadow:0 0 8px rgba(11, 11, 11, 0.78);
+  -moz-box-shadow:0 0 8px rgba(11, 11, 11, 0.78);
+  padding:10px;
+
+  .articles-title{
+    a{
+      font-size: 35px;
+      font-weight: 400;
+    }
+
+  }
+  .articles-meta{
+    color:#959595;
+  }
+  .articles-content{
+    height:auto;
+    margin-top: 20px;
+    padding: 10px;
+    text-align: left;
+    overflow: hidden;
+    p{
+      color:#444443;
+      font:400 18px/1.62 "Georgia",
+            "Xin Gothic",
+            "Hiragino Sans GB",
+            "Droid Sans Fallback",
+            "Microsoft YaHei",
+            sans-serif;
+
+    }
+  }
 }
-.articles-title{
-  font-size: 2.5em;
+
+//side_part
+.side-part{
+  width:80%;
+  height:auto;
+  margin-top: 40px;
+  background-color: white;
+  -moz-border-radius:10px;
+  -webkit-border-radius:10px;
+  border-radius:10px;
+  -webkit-box-shadow:0 0 8px rgba(11, 11, 11, 0.78);
+  -moz-box-shadow:0 0 8px rgba(11, 11, 11, 0.78);
+  .title{
+    padding-top:15px;
+    padding-left:20px;
+    font-size: 1.2em;
+  }
+  hr{
+    padding:0;
+    margin: 0;
+  }
+  .content{
+    padding-top:10px;
+    padding-bottom: 20px;
+    padding-left:20px;
+    ul li{
+      border:none;
+    }
+  }
 }
-.articles-content{
-  height:150px;
-  margin-top: 20px;
-  text-align: left;
-  overflow: hidden;
-}
-.articles-content p{
-  font-size: 2.1em;
-}
+// 脚部设置
 .footer{
   width:100%;
   bottom:5px;
