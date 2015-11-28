@@ -1,7 +1,7 @@
 <% if nav.level==0 %>
-  <li class="">
+  <li class="topnav">
 <% else %>
-  <li class="">
+  <li class="subnavs">
 <% end %>
   <% if nav.subnavs.count==0 %>
     <%= link_to nav.text,nav.url  %>
