@@ -1,3 +1,8 @@
+// = require jquery
+// = require jquery_ujs
+
+// = require bootstrap-sprockets
+// = require ckeditor/init
 // $(document).on('page:change',function(){
 $(document).ready(function(){
   $("ul.subnav").each(function(){

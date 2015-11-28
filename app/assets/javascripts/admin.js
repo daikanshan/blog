@@ -1,4 +1,8 @@
+// = require jquery
+// = require jquery_ujs
 
+// = require bootstrap-sprockets
+// = require ckeditor/init
 jQuery.extend({
   once_click : function(base_url){
     $.set_delete_not_able();
