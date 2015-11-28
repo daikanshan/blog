@@ -4,9 +4,10 @@
   <meta charset="utf-8">
   <title>Front</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= stylesheet_link_tag    'front', media: 'all' %>
+  <%= stylesheet_link_tag    'front', media: 'all',"data-turbolinks-track" => true %>
   <%= javascript_include_tag 'application' %>
-  <%= javascript_include_tag 'front' %>
+  <%= javascript_include_tag 'front',"data-turbolinks-track" => true %>
+
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -27,5 +28,6 @@
   <div class="footer">
     <%= render 'shared/footer' %>
   </div>
+
 </body>
 </html>
