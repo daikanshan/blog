@@ -1,5 +1,5 @@
-
-$(document).on('page:change',function(){
+// $(document).on('page:change',function(){
+$(document).ready(function(){
   $("ul.subnav").each(function(){
     //控制子菜单宽度
     var width = 0;

@@ -63,7 +63,8 @@ jQuery.extend({
     $("#edit").removeAttr("href");
   }
 });
-$(document).on('page:change',function(){
+// $(document).on('page:change',function(){
+$(document).ready(function(){
   base_url = $(".quick_option").attr("base-url")+'/';
   $("#check_all").click(function(){
     if($("#check_all").prop("checked") == true){
