@@ -1,0 +1,23 @@
+<div id="navs">
+  <div class="search">
+    <%= form_tag front_search_path, method: :get, class: "" do %>
+      <div class="form-group has-feedback">
+        <%= search_field_tag(
+            :search,
+            params[:search],
+            placeholder: "按下回车键搜索",
+            class: "form-control"
+        ) %>
+        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+      </div>
+    <% end %>
+  </div>
+  <nav id="nav-menu" class="">
+    <div class="">
+      <ul class="topnav">
+      <%= render(@topnavs) %>
+      </ul>
+    </div>
+
+  </nav>
+</div>

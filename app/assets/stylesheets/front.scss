@@ -18,46 +18,57 @@ body{
       position: absolute;
       left:48%;
       top:120px;
+      cursor:pointer; 
+      // -moz-border-radius:100px;
+      // -webkit-border-radius:100px;
+      // border-radius:100px;
+      // -webkit-box-shadow:0 0 1px rgba(11, 11, 11, 0.78);
+      // -moz-box-shadow:0 0 1px rgba(11, 11, 11, 0.78);
     }
   }
-  .navbar{
-    // -moz-border-radius:10px;
-    // -webkit-border-radius:10px;
-    // border-radius:10px;
-    border-radius: 0;
-    -webkit-box-shadow:0 0 2px rgba(11, 11, 11, 0.78);
-    -moz-box-shadow:0 0 2px rgba(11, 11, 11, 0.78);
-  }
-  ul.topnav {
-    font-size: 1.2em;
-    li{
-      height:50px;
+  #navs{
+    width:auto;
+    background-color: white;
+    height:auto;
+    bottom:0;
+    position: fixed;
+    left:0;
+    top:0;
+    display:none;
+    -webkit-box-shadow:0 0 8px rgba(11, 11, 11, 0.78);
+    -moz-box-shadow:0 0 8px rgba(11, 11, 11, 0.78);
+    ul.topnav {
+      list-style: none;
+      font-size: 1.2em;
+      li{
+        height:50px;
+      }
     }
-  }
-  ul.subnav{
-    z-index: 99;
-    // border-radius: 10px;
-    margin-top: 0;
-    display: none;
-    position: absolute;
-    list-style: none;
-    float: left;
-    padding: 0;
-    padding-top: 3px;
-    li{
-      border-radius: 10px;
-      background-color: #F8F8F8;
-      height:40px;
-      width:100px;
+    ul.subnav{
+      z-index: 99;
+      // border-radius: 10px;
+      margin-top: 0;
+      display: none;
+      position: absolute;
+      list-style: none;
       float: left;
-      padding-top: 1px;
-      a{
-        padding-left: 15px;
-        display: block;
-        line-height: 40px;
-        text-decoration:none;
-        span{
-          padding-left: 5px;
+      padding: 0;
+      padding-top: 3px;
+      li{
+        border-radius: 10px;
+        background-color: #F8F8F8;
+        height:40px;
+        width:100px;
+        float: left;
+        padding-top: 1px;
+        a{
+          padding-left: 15px;
+          display: block;
+          line-height: 40px;
+          text-decoration:none;
+          span{
+            padding-left: 5px;
+          }
         }
       }
     }
