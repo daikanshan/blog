@@ -12,9 +12,9 @@ class Admin::MessagesController < AdminController
     elsif !params[:user].nil?
       target = Admin::User.find_by_username(params[:user])
     else
-      @admin_messages = Admin::Message.all
+      @admin_messages = Admin::Message.all.order("created_at DESC")
     end
-    @admin_messages = target.messages if !target.nil?
+    @admin_messages = target.messages.order("created_at DESC") if !target.nil?
   end
 
   # GET /admin/messages/1

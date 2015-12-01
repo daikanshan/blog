@@ -27,9 +27,6 @@ class ApplicationController < ActionController::Base
 
   # pygments.rb
   def markdown(text)
-    text = text.gsub(/<\/?.*?>/,"")
-    text["&lt;"]="<"
-    text["&gt;"]=">"
     renderer = HTMLwithPygments.new({
       :filter_html => true,
       :hard_wrap => true,

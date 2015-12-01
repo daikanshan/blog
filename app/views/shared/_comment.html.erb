@@ -8,7 +8,7 @@
       <%= comment.visitname %>:
     </div>
     <div class="content">
-      <%= comment.content.html_safe %>
+      <%= markdown comment.content.html_safe %>
     </div>
     <hr>
   <% end %>
@@ -35,8 +35,11 @@
         placeholder: "邮箱",
         class: "form-control"
     ) %>
-    <div class="form-group">
+    <!-- <div class="form-group">
       <%= cktext_area :content, :info, :cols => 40, :ckeditor => {:uiColor => '#fefefe', :toolbar => 'mini'} %>
+    </div> -->
+    <div class="form-group">
+      <%= text_area_tag :content,"",placeholder: "leave something...",rows:"8" ,class:"form-control" %>
     </div>
     <%= submit_tag "评论" %>
   <% end %>

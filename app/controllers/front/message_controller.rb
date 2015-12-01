@@ -4,21 +4,21 @@ class Front::MessageController < FrontController
   end
 
   def show_tag_messages
-    @messages = Admin::Tag.find_by_name(params[:tagname]).messages if !params[:tagname].nil?
+    @messages = Admin::Tag.find_by_name(params[:tagname]).messages.order("created_at DESC") if !params[:tagname].nil?
     @type = "tag"
     @name = params[:tagname]
     render :index
   end
 
   def show_category_messages
-    @messages = Admin::Category.find_by_name(params[:categoryname]).messages if !params[:categoryname].nil?
+    @messages = Admin::Category.find_by_name(params[:categoryname]).messages.order("created_at DESC") if !params[:categoryname].nil?
     @type = "category"
     @name = params[:categoryname]
     render :index
   end
 
   def show_user_messages
-    @messages = Admin::User.find_by_username(params[:username]).messages if !params[:username].nil?
+    @messages = Admin::User.find_by_username(params[:username]).messages.order("created_at DESC") if !params[:username].nil?
     @type = "user"
     @name = params[:username]
     render :index

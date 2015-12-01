@@ -70,7 +70,7 @@ class Admin::CommentsController < AdminController
       prms[:visitname] = params[:username]
       prms[:message_id] = params[:message_id]
       prms[:email] = params[:email]
-      prms[:content] = params[:content][:info]
+      prms[:content] = params[:content]
       prms
     end
 end
