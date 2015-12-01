@@ -23,6 +23,7 @@ class Admin::Message < ActiveRecord::Base
   end
 
   def add_category(categoryName)
+    remove_category
     current_category = Admin::Category.find_by_name(categoryName)
     if current_category.nil?
       return
@@ -34,16 +35,7 @@ class Admin::Message < ActiveRecord::Base
       end while !father_id.nil?
     end
   end
-  def remove_category(categoryName)
-    current_category = Admin::Category.find_by_name(categoryName)
-    if current_category.nil?
-      return
-    else
-      begin
-        categories.delete(current_category)
-        father_id = current_category.father_id
-        current_category = Admin::Category.find_by_id(father_id)
-      end while !father_id.nil?
-    end
+  def remove_category
+    categories.clear
   end
 end

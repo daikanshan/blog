@@ -11,7 +11,7 @@
         创建时间：<%= DateTime.parse(@message.created_at.to_s).strftime('%Y-%m-%d') %>
       </div>
       <div class="articles-content">
-        <%= @message.content.html_safe %>
+        <%= markdown @message.content.gsub(/<\/?.*?>/,"") %>
       </div>
       <div class="articles-footer">
       </div>

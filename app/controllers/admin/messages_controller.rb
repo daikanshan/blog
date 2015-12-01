@@ -63,6 +63,7 @@ class Admin::MessagesController < AdminController
   # PATCH/PUT /admin/messages/1.json
   def update
     prms = admin_message_params
+    @admin_message.remove_category
     prms[:abstract] = prms[:content].strip[0,10]
     respond_to do |format|
       if @admin_message.update(prms)
@@ -72,6 +73,7 @@ class Admin::MessagesController < AdminController
             @admin_message.add_tag(tagName)
           end
         end
+
         @admin_message.add_category(prms[:category])
         format.html { redirect_to @admin_message, notice: 'Message was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_message }

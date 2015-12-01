@@ -62,7 +62,9 @@ gem 'mini_magick'
 
 # 获取文件系统信息
 gem 'sys-filesystem'
-
+# markdown语法支持
+gem 'redcarpet'
+gem 'pygments.rb'
 # 更友好地显示错误信息
 group :development do
   gem "better_errors"

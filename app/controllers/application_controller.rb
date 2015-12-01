@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :check_init
+  helper_method [:markdown]
 
   def check_login
     if session[:user_id].nil?
@@ -11,6 +12,40 @@ class ApplicationController < ActionController::Base
         format.json { head :no_content }
       end
     end
+  end
+  # Redcarpet
+  class HTMLwithPygments < Redcarpet::Render::HTML
+    def block_code(code, language)
+      sha = Digest::SHA1.hexdigest(code)
+      Rails.cache.fetch ["code", language, sha].join("-") do
+        Pygments.highlight(code, :lexer => language)
+      end
+    end
+  end
+
+  protected
+
+  # pygments.rb
+  def markdown(text)
+    text = text.gsub(/<\/?.*?>/,"")
+    text["&lt;"]="<"
+    text["&gt;"]=">"
+    renderer = HTMLwithPygments.new({
+      :filter_html => true,
+      :hard_wrap => true,
+      :link_attributes => {:rel => 'external nofollow'}
+    })
+
+    options = {
+      :autolink => true,
+      :no_intra_emphasis => true,
+      :fenced_code_blocks => true,
+      :lax_html_blocks => true,
+      :strikethrough => true,
+      :superscript => true
+    }
+
+    Redcarpet::Markdown.new(renderer, options).render(text).html_safe
   end
 private
   def check_init
