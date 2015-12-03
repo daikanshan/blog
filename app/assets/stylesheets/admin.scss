@@ -2,7 +2,7 @@
 @import "bootstrap";
 .header{
   width:auto;
-  height:150px;
+  height:180px;
   background-color: rgb(144, 122, 153)
 }
 .content{
@@ -12,4 +12,10 @@
 
 .quick_option form{
   float: left;
+}
+#return_index{
+  float:left;
+}
+#logout{
+  float:right;
 }

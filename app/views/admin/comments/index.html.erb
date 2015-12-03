@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Admin Comments</h1>
+<h1>评论管理</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>From</th>
@@ -15,9 +15,9 @@
   <tbody>
     <% @admin_comments.each do |admin_comment| %>
       <tr>
-        <td><%= admin_comment.from %></td>
+        <td><%= admin_comment.visitname %></td>
         <td><%= admin_comment.to %></td>
-        <td><%= admin_comment.content %></td>
+        <td><%= admin_comment.content[1..100] %></td>
         <td><%= link_to 'Show', admin_comment %></td>
         <td><%= link_to 'Edit', edit_admin_comment_path(admin_comment) %></td>
         <td><%= link_to 'Destroy', admin_comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -25,7 +25,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Comment', new_admin_comment_path %>
