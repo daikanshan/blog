@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
   root 'front/home#index'
 
-  get 'message/:title' => 'front/message#show',as: :message
+  get 'message/:title' => 'front/message#show',title: /[^\/]+/,as: :message
   get 'messages/user/:username' => 'front/message#show_user_messages',as: :messages_to_user
   get 'messages/tag/:tagname' => 'front/message#show_tag_messages',as: :messages_to_tag
   get 'messages/category/:categoryname' => 'front/message#show_category_messages',as: :messages_to_category

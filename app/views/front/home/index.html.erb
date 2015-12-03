@@ -11,7 +11,7 @@
         创建时间：<%= DateTime.parse(msg.created_at.to_s).strftime('%Y-%m-%d') %>
       </div>
       <div class="articles-content">
-        <%= markdown msg.content %>
+        <%= markdown msg.content[1..50] %>
       </div>
       <div class="articles-footer">
         <%= button_to "阅读全文", message_path(title: msg.title) ,

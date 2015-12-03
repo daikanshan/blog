@@ -75,7 +75,7 @@ class Admin::MessagesController < AdminController
         end
 
         @admin_message.add_category(prms[:category])
-        format.html { redirect_to @admin_message, notice: 'Message was successfully updated.' }
+        format.html { redirect_to admin_messages_url, notice: 'Message was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_message }
       else
         format.html { render :edit }
