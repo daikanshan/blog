@@ -12,9 +12,11 @@ class Admin::MessagesController < AdminController
     elsif !params[:user].nil?
       target = Admin::User.find_by_username(params[:user])
     else
-      @admin_messages = Admin::Message.all.order("created_at DESC")
+      @admin_messages = Admin::Message.all.order("created_at DESC").paginate(:page=>params[:page],
+              :per_page => 10)
     end
-    @admin_messages = target.messages.order("created_at DESC") if !target.nil?
+    @admin_messages = target.messages.order("created_at DESC").paginate(:page=>params[:page],
+              :per_page => 10) if !target.nil?
   end
 
   # GET /admin/messages/1

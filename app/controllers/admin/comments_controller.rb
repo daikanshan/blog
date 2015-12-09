@@ -3,7 +3,8 @@ class Admin::CommentsController < AdminController
   # GET /admin/comments
   # GET /admin/comments.json
   def index
-    @admin_comments = Admin::Comment.all
+    @admin_comments = Admin::Comment.all.paginate(:page=>params[:page],
+              :per_page => 10)
   end
 
   # GET /admin/comments/1

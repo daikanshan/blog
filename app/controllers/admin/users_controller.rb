@@ -4,7 +4,8 @@ class Admin::UsersController < AdminController
   # GET /admin/users
   # GET /admin/users.json
   def index
-    @admin_users = Admin::User.all
+    @admin_users = Admin::User.all.paginate(:page=>params[:page],
+              :per_page => 10)
   end
 
   # GET /admin/users/1

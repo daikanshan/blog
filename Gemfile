@@ -41,6 +41,7 @@ gem 'mysql2'
 # 分页插件
 gem 'kaminari'
 gem 'will_paginate'
+gem 'bootstrap-will_paginate'
 # memcache插件，用于缓存
 gem 'dalli'
 

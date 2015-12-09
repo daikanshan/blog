@@ -1,5 +1,5 @@
 <%= stylesheet_link_tag 'front/message' %>
-<% if @messages.count!=0 %>
+<% if @messages.count!=0&&!@messages.nil? %>
   <% @messages.each do |msg| %>
     <div class="outer">
       <!-- <div class="articles col-sm-10 col-sm-offset-1"> -->
@@ -14,3 +14,4 @@
     <%= render 'shared/not_found',locals:{type:@type,name:@name} %>
   </div>
 <% end %>
+<%= will_paginate @messages %>
