@@ -1,6 +1,6 @@
 // = require jquery
 // = require jquery_ujs
-
+// = require bootstrap-diy/icheck/icheck
 // = require bootstrap-sprockets
 // = require ckeditor/init
 jQuery.extend({
@@ -25,10 +25,12 @@ jQuery.extend({
     }
   },
   set_checked_all_able :function(){
-    $("#check_all").prop("checked",true);
+    // $("#check_all").prop("checked",true);
+    // $("#check_all").iCheck('check');
   },
   set_checked_all_not_able :function(){
-    $("#check_all").prop("checked",false);
+    // $("#check_all").prop("checked",false);
+    // $("#check_all").iCheck('uncheck');
   },
   get_all_num : function(){
     return $(".item_line").length;
@@ -69,25 +71,37 @@ jQuery.extend({
 });
 // $(document).on('page:change',function(){
 $(document).ready(function(){
+  // 漂亮的单选和复选框
+  $('.p_radio, .p_checkbox').iCheck({
+    radioClass: 'iradio_square-blue',
+    checkboxClass: 'icheckbox_square-blue'
+  });
+
+  // 全选||部分选择操作
   base_url = $(".quick_option").attr("base-url")+'/';
-  $("#check_all").click(function(){
+  $("#check_all").on("ifToggled",function(){
     if($("#check_all").prop("checked") == true){
       $(".item_line").each(function(){
-        $(this).find(".p_checkbox").prop("checked",true);
+        // $(this).find(".p_checkbox").prop("checked",true);
+        $(this).find(".p_checkbox").iCheck('check');
       })
     }else{
       $(".item_line").each(function(){
-        $(this).find(".p_checkbox").prop("checked",false);
+        // $(this).find(".p_checkbox").prop("checked",false);
+        $(this).find(".p_checkbox").iCheck('uncheck');
       })
     }
     $.once_click(base_url);
   });
+  $(".p_checkbox").on("ifToggled",function(){
+    $.once_click(base_url);
+  })
   $(".item_line").click(function(event){
     if(event.target.nodeName=="TD"){
       check_box = $(this).find(".p_checkbox");
       // 选中
-      check_box.prop("checked",!check_box.prop("checked"));
+      // check_box.prop("checked",!check_box.prop("checked"));
+      $(this).find(".p_checkbox").iCheck('toggle');
     }
-    $.once_click(base_url);
   });
 });
